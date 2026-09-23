@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>LostLink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>LostLink</h1>
+    <p>Campus Lost & Found</p>
+    <a class="button" href="{{ url_for('report') }}">Report an Item</a>
+    <a class="button secondary" href="{{ url_for('search') }}">Search Items</a>
+</div>
+</body>
+</html>

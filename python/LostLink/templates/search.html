@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <title>Search - LostLink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Search Items</h1>
+    <form method="get">
+        <input name="q" value="{{ q }}" placeholder="Search item, category, location...">
+        <button type="submit">Search</button>
+    </form>
+
+    {% if items %}
+        {% for item in items %}
+        <div class="card">
+            <h2>{{ item["name"] }}</h2>
+            <p><strong>{{ item["item_type"] }}</strong> · {{ item["category"] }}</p>
+            <p>Location: {{ item["location"] }}</p>
+            <p>Date: {{ item["date"] }}</p>
+            <p>{{ item["description"] }}</p>
+            <p>Status: {{ item["status"] }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No items found.</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}">Back home</a>
+</div>
+</body>
+</html>

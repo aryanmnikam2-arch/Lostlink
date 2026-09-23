@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>Report Item - LostLink</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Report Lost / Found Item</h1>
+    <form method="post">
+        <label>Type</label>
+        <select name="item_type" required>
+            <option value="LOST">Lost</option>
+            <option value="FOUND">Found</option>
+        </select>
+
+        <label>Item name</label>
+        <input name="name" required>
+
+        <label>Category</label>
+        <input name="category" placeholder="Electronics, ID card, wallet..." required>
+
+        <label>Location</label>
+        <input name="location" required>
+
+        <label>Date</label>
+        <input type="date" name="date" required>
+
+        <label>Description</label>
+        <textarea name="description"></textarea>
+
+        <button type="submit">Submit Report</button>
+    </form>
+    <a href="{{ url_for('home') }}">Back home</a>
+</div>
+</body>
+</html>
