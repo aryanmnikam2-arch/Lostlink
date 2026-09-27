@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Register Found Item — VIT Bhopal Lost & Found{% endblock %}
+
+{% block content %}
+<div class="form-page">
+  <div class="form-card">
+
+    <div class="form-card-header">
+      <div class="badge">🎉 Found Item Registration</div>
+      <h2>Register a Found Item</h2>
+      <p>An image is required so owners can visually identify their belongings.</p>
+    </div>
+
+    <div class="form-body">
+      <form method="POST" action="{{ url_for('found_new') }}" enctype="multipart/form-data" novalidate>
+
+        <div class="form-group">
+          <label for="item_name">Item Name <span class="req">*</span></label>
+          <input
+            id="item_name"
+            type="text"
+            name="item_name"
+            class="form-control"
+            placeholder="e.g. Black Water Bottle"
+            value="{{ form_data.get('item_name','') }}"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description <span class="req">*</span></label>
+          <textarea
+            id="description"
+            name="description"
+            class="form-control"
+            placeholder="Describe the item — brand, colour, any text/label visible…"
+            required
+          >{{ form_data.get('description','') }}</textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="location_found">Location Found <span class="req">*</span></label>
+            <input
+              id="location_found"
+              type="text"
+              name="location_found"
+              class="form-control"
+              placeholder="e.g. Library, Block A, Canteen"
+              value="{{ form_data.get('location_found','') }}"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="time_found">Time Found <span class="req">*</span></label>
+            <input
+              id="time_found"
+              type="datetime-local"
+              name="time_found"
+              class="form-control"
+              value="{{ form_data.get('time_found','') }}"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact_details">Your Contact Details <span class="req">*</span></label>
+          <input
+            id="contact_details"
+            type="text"
+            name="contact_details"
+            class="form-control"
+            placeholder="Phone / WhatsApp number"
+            value="{{ form_data.get('contact_details','') }}"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Item Photo <span class="req">*</span> <small style="color:var(--text-muted);font-weight:400;">(required)</small></label>
+          <label for="image" class="file-upload-label required-upload">
+            <span class="upload-icon">📷</span>
+            <span class="upload-title">Click to upload a photo of the item</span>
+            <span class="upload-sub">PNG, JPG, WEBP — max 5 MB</span>
+          </label>
+          <input id="image" type="file" name="image" accept="image/*" required />
+          <div class="file-preview">
+            <img src="" alt="Preview" />
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <a href="{{ url_for('dashboard') }}" class="btn btn-ghost">← Back</a>
+          <button type="submit" class="btn btn-accent">
+            <span class="btn-text">📦 Register Found Item</span>
+            <span class="spinner"></span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

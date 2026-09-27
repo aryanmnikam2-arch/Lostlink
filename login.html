@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Login — VIT Bhopal Lost & Found{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+
+  <!-- Left decorative panel -->
+  <div class="auth-left">
+    <div class="auth-left-logo">V</div>
+    <h1>VIT Bhopal<br><span>Lost &amp; Found</span></h1>
+    <p>The dedicated campus platform to report lost items and register found ones — all in one place.</p>
+
+    <ul class="auth-features">
+      <li>
+        <span class="icon">🔐</span>
+        Restricted to <strong>@{{ allowed_domain }}</strong> only
+      </li>
+      <li>
+        <span class="icon">🤖</span>
+        Gemini AI-powered semantic matching
+      </li>
+      <li>
+        <span class="icon">📦</span>
+        Amazon-style catalog of found items
+      </li>
+      <li>
+        <span class="icon">📬</span>
+        Instant OTP verification — no passwords
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right login card -->
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2>Welcome Back 👋</h2>
+        <p>Enter your institutional email to get started.</p>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}" style="margin-bottom:1rem;">
+          <span class="flash-icon">{% if category=='error'%}❌{% elif category=='success'%}✅{% else %}ℹ️{% endif %}</span>
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('login') }}" novalidate>
+        <div class="form-group">
+          <label for="email-input">Institutional Email <span class="req">*</span></label>
+          <div class="input-wrapper">
+            <span class="input-icon">✉️</span>
+            <input
+              id="email-input"
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="yourname@{{ allowed_domain }}"
+              data-allowed-domain="{{ allowed_domain }}"
+              required
+              autocomplete="email"
+              autofocus
+            />
+          </div>
+          <small id="email-hint" style="font-size:12px;margin-top:5px;display:block;"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+          <span class="btn-text">Send Verification Code</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+
+      <p style="font-size:12px;color:var(--text-muted);text-align:center;margin-top:1.5rem;">
+        Access is restricted to verified <strong style="color:var(--primary);">@{{ allowed_domain }}</strong> members only.
+      </p>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — VIT Bhopal Lost & Found{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrap">
+
+  <!-- Single full-width panel — Found Something -->
+  <a href="{{ url_for('found_new') }}" class="dash-half found" style="flex:1;">
+    <div class="dash-content">
+      <div class="dash-icon">🎉</div>
+      <h2>Register a Found Item</h2>
+      <p>
+        Upload a photo and fill in the details of the item you found on campus.
+        Our AI will instantly match it against open lost reports.
+      </p>
+      <span class="dash-cta">Register Found Item →</span>
+    </div>
+  </a>
+
+</div>
+{% endblock %}

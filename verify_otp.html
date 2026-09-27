@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}Verify OTP — VIT Bhopal Lost & Found{% endblock %}
+
+{% block content %}
+<div class="auth-page">
+
+  <div class="auth-left">
+    <div class="auth-left-logo">V</div>
+    <h1>Almost<br><span>There!</span></h1>
+    <p>Check your inbox for the 6-digit verification code we just sent you. It expires in <strong>10 minutes</strong>.</p>
+
+    <ul class="auth-features">
+      <li><span class="icon">📧</span>Code sent to your institutional email</li>
+      <li><span class="icon">⏱️</span>Valid for 10 minutes</li>
+      <li><span class="icon">🔒</span>One-time use — do not share</li>
+    </ul>
+  </div>
+
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-card-header">
+        <h2>Enter OTP 🔢</h2>
+        <p>Code sent to <strong>{{ email }}</strong></p>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <div class="flash flash-{{ category }}" style="margin-bottom:1rem;">
+          <span class="flash-icon">{% if category=='error'%}❌{% elif category=='info'%}ℹ️{% else %}✅{% endif %}</span>
+          {{ message }}
+        </div>
+        {% endfor %}
+      {% endwith %}
+
+      <form method="POST" action="{{ url_for('verify_otp') }}" novalidate>
+        <div class="form-group">
+          <label for="otp-input">6-Digit Code <span class="req">*</span></label>
+          <input
+            id="otp-input"
+            type="text"
+            name="otp"
+            class="form-control otp-input"
+            placeholder="——————"
+            maxlength="6"
+            inputmode="numeric"
+            pattern="\d{6}"
+            autocomplete="one-time-code"
+            autofocus
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full">
+          <span class="btn-text">Verify &amp; Continue →</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+
+      <div class="resend-link">
+        Didn't receive it?
+        <form method="POST" action="{{ url_for('resend_otp') }}" style="display:inline;">
+          <button type="submit" class="no-loading">Resend Code</button>
+        </form>
+        &nbsp;·&nbsp;
+        <a href="{{ url_for('login') }}">Change email</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
